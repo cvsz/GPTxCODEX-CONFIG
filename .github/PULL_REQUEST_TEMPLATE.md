@@ -21,7 +21,17 @@ List the exact commands and checks performed.
 # Example
 python -m tomllib config.toml
 pwsh -NoProfile -File ./powershell/install.ps1 -WhatIf
+git log --show-signature -1
 ```
+
+## Commit signatures
+
+- [ ] Every human-authored commit is cryptographically signed.
+- [ ] Every commit displays **Verified** on GitHub.
+- [ ] No private key, passphrase, revocation certificate, or secret key export is included.
+- [ ] Rewritten history, when required, was pushed with `--force-with-lease` and did not affect a shared protected branch.
+
+See [`GPG_SIGNING.md`](../GPG_SIGNING.md) for setup and remediation guidance.
 
 ## Security and privacy
 
