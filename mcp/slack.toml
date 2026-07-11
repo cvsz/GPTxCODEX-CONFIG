@@ -1,1 +1,16 @@
-# Template for slack MCP
+# Slack MCP
+# Use a dedicated Slack app and token with access only to approved workspaces and
+# channels. Prefer read-only scopes unless message writes are required.
+
+[mcp_servers.slack]
+command = "npx.cmd"
+args = ["-y", "<verified-slack-mcp-package>"]
+env_vars = ["SLACK_BOT_TOKEN", "SLACK_TEAM_ID"]
+enabled = false
+required = false
+startup_timeout_sec = 45
+tool_timeout_sec = 120
+default_tools_approval_mode = "prompt"
+
+# Require explicit approval for posting, editing, deleting, inviting users, or
+# reading private channels. Respect retention and sensitive-data policies.

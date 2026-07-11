@@ -1,1 +1,16 @@
-# Template for filesystem MCP
+# Filesystem MCP
+# Scope filesystem access to an explicit project directory. Never expose the
+# user profile, credential stores, SSH keys, browser data, or system folders.
+
+[mcp_servers.filesystem]
+command = "npx.cmd"
+args = ["-y", "@modelcontextprotocol/server-filesystem", "${CODEX_MCP_WORKSPACE}"]
+env_vars = ["CODEX_MCP_WORKSPACE"]
+enabled = false
+required = false
+startup_timeout_sec = 30
+tool_timeout_sec = 90
+default_tools_approval_mode = "writes"
+
+# Set CODEX_MCP_WORKSPACE to one trusted repository path before enabling and
+# verify the maintained package name/version for the installed environment.

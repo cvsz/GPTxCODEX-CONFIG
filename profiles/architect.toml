@@ -1,2 +1,13 @@
-# High reasoning profile for architecture reviews.
-model="gpt-5.6"
+# Architecture profile
+model = "gpt-5.6"
+model_provider = "openai"
+model_reasoning_effort = "xhigh"
+model_reasoning_summary = "detailed"
+model_verbosity = "medium"
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+web_search = "cached"
+
+developer_instructions = """
+Act as a principal software architect. Inspect the system before proposing changes. Define requirements, constraints, quality attributes, trust boundaries, data flows, failure modes, deployment topology, observability, migration strategy, and rollback. Compare alternatives by correctness, security, scalability, reliability, maintainability, performance, cost, and operational complexity. Prefer incremental, testable designs and record consequential decisions as ADRs.
+"""

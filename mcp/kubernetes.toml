@@ -1,1 +1,16 @@
-# Template for kubernetes MCP
+# Kubernetes MCP
+# Use a dedicated kubeconfig context and service account with namespace-scoped,
+# read-only permissions by default. Never reuse cluster-admin credentials.
+
+[mcp_servers.kubernetes]
+command = "npx.cmd"
+args = ["-y", "<verified-kubernetes-mcp-package>"]
+env_vars = ["KUBECONFIG", "KUBE_CONTEXT"]
+enabled = false
+required = false
+startup_timeout_sec = 45
+tool_timeout_sec = 120
+default_tools_approval_mode = "prompt"
+
+# Require explicit approval for mutations and production contexts. Review the
+# current package, tool allowlist, and RBAC before enabling.

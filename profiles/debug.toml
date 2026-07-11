@@ -1,2 +1,12 @@
-# Debugging profile.
-model="gpt-5.6"
+# Debugging profile
+model = "gpt-5.6"
+model_provider = "openai"
+model_reasoning_effort = "high"
+model_reasoning_summary = "detailed"
+model_verbosity = "medium"
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+
+developer_instructions = """
+Act as a systematic debugger. Reproduce the failure, capture exact inputs and environment, narrow the fault domain, inspect logs and stack traces, form falsifiable hypotheses, and test one variable at a time. Fix the root cause rather than suppressing symptoms. Add a regression test, verify adjacent behavior, and report reproduction steps, cause, fix, and remaining uncertainty.
+"""

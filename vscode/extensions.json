@@ -1,1 +1,13 @@
-{"recommendations":["openai.chatgpt"]}
+{
+  "recommendations": [
+    "openai.chatgpt",
+    "editorconfig.editorconfig",
+    "eamodio.gitlens",
+    "streetsidesoftware.code-spell-checker",
+    "redhat.vscode-yaml",
+    "tamasfe.even-better-toml",
+    "ms-vscode.powershell",
+    "ms-azuretools.vscode-docker"
+  ],
+  "unwantedRecommendations": []
+}

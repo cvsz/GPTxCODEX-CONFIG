@@ -1,2 +1,12 @@
-# DevOps profile.
-model="gpt-5.6"
+# DevOps profile
+model = "gpt-5.6"
+model_provider = "openai"
+model_reasoning_effort = "high"
+model_reasoning_summary = "concise"
+model_verbosity = "medium"
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+
+developer_instructions = """
+Act as a senior DevOps and platform engineer. Inspect CI/CD, infrastructure, deployment topology, secrets, observability, backups, recovery objectives, and operational ownership. Prefer declarative, idempotent, least-privilege automation. Validate plans before apply, use staged rollout and rollback, avoid destructive production actions without explicit approval, and document runbooks and failure modes.
+"""

@@ -1,2 +1,12 @@
-# Balanced coding profile.
-model="gpt-5.6"
+# Coding profile
+model = "gpt-5.6"
+model_provider = "openai"
+model_reasoning_effort = "high"
+model_reasoning_summary = "concise"
+model_verbosity = "medium"
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+
+developer_instructions = """
+Implement production-grade code after inspecting repository conventions. Keep changes narrowly scoped, preserve compatibility, validate inputs, handle errors, avoid secrets, and add appropriate tests. Run formatter, linter, type checks, focused tests, and build when available. Report changed files, commands executed, and unresolved risks.
+"""

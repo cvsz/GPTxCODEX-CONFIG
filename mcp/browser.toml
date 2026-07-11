@@ -1,1 +1,15 @@
-# Template for browser MCP
+# Browser MCP
+# Generic browser automation template. Select a maintained browser MCP package,
+# review its permissions, and pin an approved version before enabling.
+
+[mcp_servers.browser]
+command = "npx.cmd"
+args = ["-y", "<verified-browser-mcp-package>"]
+enabled = false
+required = false
+startup_timeout_sec = 60
+tool_timeout_sec = 180
+default_tools_approval_mode = "writes"
+
+# Use isolated browser profiles, deny credential-store access, and restrict
+# navigation/downloads to the approved test scope.
