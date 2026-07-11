@@ -1,0 +1,62 @@
+name: Bug report
+description: Report a reproducible problem in the configuration pack
+title: "[Bug]: "
+labels: [bug, triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a problem. Remove or redact secrets, tokens, paths, and private repository data before submitting.
+  - type: input
+    id: version
+    attributes:
+      label: Codex or ChatGPT version
+      description: Include the exact application or CLI version.
+      placeholder: codex-cli 0.x.x / ChatGPT Desktop build
+    validations:
+      required: true
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment
+      options:
+        - Windows 11 native
+        - Windows 10 native
+        - WSL2
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Problem description
+      description: Explain the observed behavior and the expected behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps
+      placeholder: |
+        1. Install...
+        2. Run...
+        3. Observe...
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs
+      description: Paste sanitized logs. Never include secrets or credentials.
+      render: shell
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-submission checks
+      options:
+        - label: I searched existing issues and pull requests.
+          required: true
+        - label: I removed all secrets and private data.
+          required: true
+        - label: I tested with the latest supported release available to me.
+          required: true

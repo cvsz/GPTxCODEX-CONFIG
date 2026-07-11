@@ -1,0 +1,31 @@
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*.p12
+
+# Codex and editor local state
+.codex/
+.vscode/*.local.json
+.idea/
+
+# PowerShell and system artifacts
+*.clixml
+*.tmp
+*.bak
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Logs and test output
+*.log
+coverage/
+test-results/
+
+# Python caches used by validation helpers
+__pycache__/
+*.py[cod]
+.venv/

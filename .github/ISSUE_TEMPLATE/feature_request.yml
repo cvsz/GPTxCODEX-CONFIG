@@ -1,0 +1,40 @@
+name: Feature request
+description: Propose an improvement to the configuration pack
+title: "[Feature]: "
+labels: [enhancement, triage]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or opportunity
+      description: Describe the user need, operational gap, or maintenance problem.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Explain the desired behavior, configuration, workflow, or documentation change.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Describe viable alternatives and trade-offs.
+  - type: textarea
+    id: impact
+    attributes:
+      label: Compatibility and security impact
+      description: Note affected platforms, Codex versions, migration concerns, permissions, network access, or secrets handling.
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-submission checks
+      options:
+        - label: I searched existing issues and pull requests.
+          required: true
+        - label: This request does not require committing credentials or private data.
+          required: true

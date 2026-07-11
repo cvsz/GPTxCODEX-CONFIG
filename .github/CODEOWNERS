@@ -1,0 +1,8 @@
+# Default owner for repository changes
+* @cvsz
+
+# Sensitive automation and security configuration
+/.github/ @cvsz
+/config.toml @cvsz
+/mcp/ @cvsz
+/powershell/ @cvsz
