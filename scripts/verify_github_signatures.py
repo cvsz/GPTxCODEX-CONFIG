@@ -12,9 +12,11 @@ import urllib.request
 from pathlib import Path
 from typing import Any
 
+POLICY_PATH = ".github/workflows/verify-signatures.yml"
 
-def api_get(url: str, token: str) -> tuple[Any, dict[str, str]]:
-    request = urllib.request.Request(
+
+def make_request(url: str, token: str) -> urllib.request.Request:
+    return urllib.request.Request(
         url,
         headers={
             "Accept": "application/vnd.github+json",
@@ -23,12 +25,28 @@ def api_get(url: str, token: str) -> tuple[Any, dict[str, str]]:
             "User-Agent": "gptxcodex-signature-check",
         },
     )
+
+
+def api_get(url: str, token: str) -> tuple[Any, dict[str, str]]:
+    request = make_request(url, token)
     try:
         with urllib.request.urlopen(request, timeout=30) as response:
             body = json.load(response)
             headers = {key.lower(): value for key, value in response.headers.items()}
             return body, headers
     except urllib.error.HTTPError as exc:
+        details = exc.read().decode("utf-8", errors="replace")
+        raise RuntimeError(f"GitHub API request failed ({exc.code}): {details}") from exc
+
+
+def api_exists(url: str, token: str) -> bool:
+    request = make_request(url, token)
+    try:
+        with urllib.request.urlopen(request, timeout=30):
+            return True
+    except urllib.error.HTTPError as exc:
+        if exc.code == 404:
+            return False
         details = exc.read().decode("utf-8", errors="replace")
         raise RuntimeError(f"GitHub API request failed ({exc.code}): {details}") from exc
 
@@ -68,6 +86,16 @@ def collect_push_commits(api_url: str, repository: str, event: dict[str, Any], t
     return commits
 
 
+def base_contains_policy(api_url: str, repository: str, event: dict[str, Any], token: str) -> bool:
+    base_sha = ((event.get("pull_request") or {}).get("base") or {}).get("sha")
+    if not base_sha:
+        raise RuntimeError("Pull request base SHA is missing from the event payload")
+    encoded_path = urllib.parse.quote(POLICY_PATH, safe="/")
+    encoded_ref = urllib.parse.quote(base_sha)
+    url = f"{api_url}/repos/{repository}/contents/{encoded_path}?ref={encoded_ref}"
+    return api_exists(url, token)
+
+
 def main() -> int:
     token = os.environ.get("GITHUB_TOKEN")
     repository = os.environ.get("GITHUB_REPOSITORY")
@@ -91,6 +119,12 @@ def main() -> int:
     event = json.loads(Path(event_path).read_text(encoding="utf-8"))
 
     if event_name == "pull_request":
+        if not base_contains_policy(api_url, repository, event, token):
+            print(
+                f"Bootstrap mode: {POLICY_PATH} is not present on the pull request base. "
+                "Skipping verification for the policy-introduction pull request only."
+            )
+            return 0
         commits = collect_pr_commits(api_url, repository, int(event["number"]), token)
     elif event_name == "push":
         commits = collect_push_commits(api_url, repository, event, token)
