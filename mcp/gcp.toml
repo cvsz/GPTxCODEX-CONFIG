@@ -1,1 +1,16 @@
-# Template for gcp MCP
+# Google Cloud MCP
+# Authenticate with Application Default Credentials or workload identity. Use a
+# dedicated project and least-privilege service account.
+
+[mcp_servers.gcp]
+command = "npx.cmd"
+args = ["-y", "<verified-gcp-mcp-package>"]
+env_vars = ["GOOGLE_CLOUD_PROJECT", "GOOGLE_APPLICATION_CREDENTIALS"]
+enabled = false
+required = false
+startup_timeout_sec = 45
+tool_timeout_sec = 120
+default_tools_approval_mode = "prompt"
+
+# Do not commit credential files. Require approval for IAM, billing, deployment,
+# data deletion, and production mutations.

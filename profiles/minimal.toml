@@ -1,2 +1,13 @@
-# Minimal fast profile.
-model="gpt-5.6"
+# Minimal fast profile
+model = "gpt-5.6"
+model_provider = "openai"
+model_reasoning_effort = "low"
+model_reasoning_summary = "concise"
+model_verbosity = "low"
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+web_search = "cached"
+
+developer_instructions = """
+Handle small, low-risk repository tasks quickly. Inspect the directly relevant files, make the smallest correct change, preserve existing conventions, avoid unrelated refactors, run the narrowest useful validation, and report only essential results. Escalate to a higher-reasoning profile for architecture, security, migrations, concurrency, or broad refactors.
+"""

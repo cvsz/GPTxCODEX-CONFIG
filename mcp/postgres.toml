@@ -1,1 +1,16 @@
-# Template for postgres MCP
+# PostgreSQL MCP
+# Use a dedicated read-only database identity whenever possible. Keep the
+# connection string in DATABASE_URL and never commit credentials.
+
+[mcp_servers.postgres]
+command = "npx.cmd"
+args = ["-y", "@modelcontextprotocol/server-postgres"]
+env_vars = ["DATABASE_URL"]
+enabled = false
+required = false
+startup_timeout_sec = 30
+tool_timeout_sec = 90
+default_tools_approval_mode = "prompt"
+
+# Verify that the package remains maintained and confirm its current connection
+# argument contract before enabling. Restrict network access at the database.

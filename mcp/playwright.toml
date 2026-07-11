@@ -1,1 +1,15 @@
-# Template for playwright MCP
+# Playwright MCP
+# Browser testing template for local or CI environments. Verify the exact
+# maintained package and pin the approved version before enabling.
+
+[mcp_servers.playwright]
+command = "npx.cmd"
+args = ["-y", "<verified-playwright-mcp-package>"]
+enabled = false
+required = false
+startup_timeout_sec = 60
+tool_timeout_sec = 180
+default_tools_approval_mode = "writes"
+
+# Use test accounts and isolated browser profiles. Never grant access to personal
+# sessions, password stores, payment data, or unrelated websites.
