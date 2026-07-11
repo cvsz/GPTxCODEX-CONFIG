@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/cvsz/GPTxCODEX-CONFIG/security/advisories/new
+    about: Report security vulnerabilities privately through GitHub Security Advisories.
+  - name: Support and usage questions
+    url: https://github.com/cvsz/GPTxCODEX-CONFIG/discussions
+    about: Use GitHub Discussions for setup help and general questions when enabled.
