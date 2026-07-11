@@ -1,1 +1,16 @@
-# Template for azure MCP
+# Azure MCP
+# Authenticate with Azure CLI, managed identity, or workload identity. Use a
+# dedicated subscription/resource group and least-privilege role assignments.
+
+[mcp_servers.azure]
+command = "npx.cmd"
+args = ["-y", "<verified-azure-mcp-package>"]
+env_vars = ["AZURE_SUBSCRIPTION_ID", "AZURE_TENANT_ID"]
+enabled = false
+required = false
+startup_timeout_sec = 45
+tool_timeout_sec = 120
+default_tools_approval_mode = "prompt"
+
+# Require explicit approval for writes, role changes, deployments, and production
+# resources. Verify package provenance and supported tools before enabling.

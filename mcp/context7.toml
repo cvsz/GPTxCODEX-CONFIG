@@ -1,1 +1,14 @@
-# Template for context7 MCP
+# Context7 MCP
+# Provides current library/framework documentation. Review package provenance
+# before enabling because `npx -y` may download and execute code.
+
+[mcp_servers.context7]
+command = "npx.cmd"
+args = ["-y", "@upstash/context7-mcp"]
+enabled = false
+required = false
+startup_timeout_sec = 30
+tool_timeout_sec = 90
+default_tools_approval_mode = "auto"
+
+# Enable only after Node.js is installed and the package/version is approved.

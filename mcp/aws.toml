@@ -1,1 +1,16 @@
-# Template for aws MCP
+# AWS MCP
+# Authenticate with an approved AWS profile or workload identity. Prefer
+# short-lived credentials and a dedicated read-only role.
+
+[mcp_servers.aws]
+command = "npx.cmd"
+args = ["-y", "<verified-aws-mcp-package>"]
+env_vars = ["AWS_PROFILE", "AWS_REGION"]
+enabled = false
+required = false
+startup_timeout_sec = 45
+tool_timeout_sec = 120
+default_tools_approval_mode = "prompt"
+
+# Scope IAM permissions, accounts, and regions. Require explicit approval for
+# mutations, billing changes, credential operations, and production resources.

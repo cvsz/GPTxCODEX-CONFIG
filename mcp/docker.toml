@@ -1,1 +1,15 @@
-# Template for docker MCP
+# Docker MCP
+# Generic Docker Desktop integration. Confirm the maintained server image and
+# expose only the minimum Docker API operations required by the workflow.
+
+[mcp_servers.docker]
+command = "docker.exe"
+args = ["run", "--rm", "-i", "<verified-docker-mcp-image>"]
+enabled = false
+required = false
+startup_timeout_sec = 60
+tool_timeout_sec = 180
+default_tools_approval_mode = "writes"
+
+# Docker socket access is effectively host-level privilege. Prefer a constrained
+# proxy or isolated development VM and never enable it for untrusted repositories.

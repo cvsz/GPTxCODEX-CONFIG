@@ -1,1 +1,16 @@
-# Template for cloudflare MCP
+# Cloudflare MCP
+# Supply a scoped API token via CLOUDFLARE_API_TOKEN and restrict it to the
+# required account, zone, and resource types.
+
+[mcp_servers.cloudflare]
+command = "npx.cmd"
+args = ["-y", "<verified-cloudflare-mcp-package>"]
+env_vars = ["CLOUDFLARE_API_TOKEN", "CLOUDFLARE_ACCOUNT_ID"]
+enabled = false
+required = false
+startup_timeout_sec = 45
+tool_timeout_sec = 120
+default_tools_approval_mode = "prompt"
+
+# Require approval for DNS, WAF, Workers, routing, access policy, certificate,
+# cache, and production configuration changes.

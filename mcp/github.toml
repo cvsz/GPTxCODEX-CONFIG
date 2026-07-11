@@ -1,1 +1,19 @@
-# Template for github MCP
+# GitHub MCP through Docker Desktop
+# Export GITHUB_PERSONAL_ACCESS_TOKEN in the user environment. Use a fine-grained
+# token with access only to required repositories and operations.
+
+[mcp_servers.github]
+command = "docker.exe"
+args = [
+  "run", "--rm", "-i",
+  "-e", "GITHUB_PERSONAL_ACCESS_TOKEN",
+  "ghcr.io/github/github-mcp-server"
+]
+env_vars = ["GITHUB_PERSONAL_ACCESS_TOKEN"]
+enabled = false
+required = false
+startup_timeout_sec = 60
+tool_timeout_sec = 180
+default_tools_approval_mode = "writes"
+
+# Review the image digest and supported tool allowlist before enabling.

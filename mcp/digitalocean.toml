@@ -1,1 +1,16 @@
-# Template for digitalocean MCP
+# DigitalOcean MCP
+# Use a scoped API token supplied through DIGITALOCEAN_ACCESS_TOKEN. Prefer a
+# dedicated project and read-only access for inspection workflows.
+
+[mcp_servers.digitalocean]
+command = "npx.cmd"
+args = ["-y", "<verified-digitalocean-mcp-package>"]
+env_vars = ["DIGITALOCEAN_ACCESS_TOKEN"]
+enabled = false
+required = false
+startup_timeout_sec = 45
+tool_timeout_sec = 120
+default_tools_approval_mode = "prompt"
+
+# Require explicit approval for resource creation, deletion, firewall changes,
+# DNS updates, database operations, and production deployments.
