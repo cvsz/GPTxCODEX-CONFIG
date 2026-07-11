@@ -9,9 +9,13 @@ config.toml                 Global Windows Codex configuration
 profiles/                   Role-specific Codex profiles
 prompts/                    Reusable engineering workflow prompts
 mcp/                        Disabled-by-default MCP configuration templates
-powershell/                 Install, update, backup, and uninstall scripts
+powershell/                 Legacy lifecycle scripts
+installer/                  Verified install, update, validation, and uninstall tools
 vscode/                     Recommended settings, extensions, and tasks
 templates/                  Project, architecture, issue, PR, and changelog templates
+LICENSE                     MIT License
+NOTICE                      Project attribution and trademark notice
+THIRD_PARTY_NOTICES.md      External software and service guidance
 ```
 
 ## Secure defaults
@@ -25,19 +29,38 @@ templates/                  Project, architecture, issue, PR, and changelog temp
 
 ## Install on Windows
 
-Requirements: Windows 10/11 and PowerShell 7.
+Requirements: Windows 10/11, PowerShell 7, and Python 3.11 or newer.
 
 ```powershell
-Set-ExecutionPolicy -Scope Process Bypass
-.\powershell\install.ps1
+pwsh -NoProfile -File .\installer\install.ps1
 ```
 
-The installer writes to `%USERPROFILE%\.codex\config.toml` and creates a timestamped backup when an existing configuration is present.
+Command Prompt launcher:
+
+```cmd
+installer\install.cmd
+```
+
+Preview without modifying the workstation:
+
+```powershell
+.\installer\install.ps1 -WhatIf
+```
+
+The installer:
+
+- validates TOML, JSON, and PowerShell files
+- creates a timestamped backup of an existing `%USERPROFILE%\.codex\config.toml`
+- installs reusable resources under `%USERPROFILE%\.codex\GPTxCODEX-CONFIG`
+- compares SHA-256 hashes after copying files
+- records installation metadata in `installation.json`
+
+See [`installer/README.md`](installer/README.md) for update, verification, rollback, and uninstall procedures.
 
 ## Update and backup
 
 ```powershell
-.\powershell\update.ps1
+.\installer\update.ps1
 .\powershell\backup.ps1
 ```
 
@@ -62,6 +85,10 @@ Template values such as `<verified-...>` are intentional safety gates and must b
 
 ## Validation
 
+```powershell
+.\installer\verify.ps1
+```
+
 This repository contains configuration and templates, not an application runtime. Validate changes by checking TOML/JSON syntax, PowerShell parsing, referenced executable availability, and compatibility with the exact Codex release installed on the target workstation.
 
 ## Security
@@ -70,4 +97,4 @@ Do not commit API keys, tokens, passwords, certificates, kubeconfigs, cloud cred
 
 ## License
 
-Add a project license before redistribution if one has not already been selected.
+Licensed under the [MIT License](LICENSE). Third-party tools and services remain governed by their own licenses and terms; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
