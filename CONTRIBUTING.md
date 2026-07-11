@@ -9,9 +9,25 @@ Contributions must preserve correctness, security, least privilege, portability,
 1. Fork or create a branch from `main`.
 2. Keep each change focused.
 3. Use Conventional Commits.
-4. Update documentation with behavior changes.
-5. Run validation locally.
-6. Open a pull request using the repository template.
+4. Cryptographically sign every human-authored commit.
+5. Update documentation with behavior changes.
+6. Run validation locally.
+7. Open a pull request using the repository template.
+
+## Commit signing
+
+Human-authored commits must display **Verified** on GitHub before merge. GPG signing is recommended; GitHub-verified SSH or S/MIME signatures are also accepted by CI.
+
+See [`GPG_SIGNING.md`](GPG_SIGNING.md) for Windows setup, Git configuration, verification, key rotation, and safe remediation of unsigned branch commits.
+
+Minimum local checks:
+
+```powershell
+git config --get commit.gpgsign
+git log --show-signature -1
+```
+
+Do not upload private keys, revocation certificates, passphrases, agent sockets, or exported secret-key material.
 
 ## Local validation
 
@@ -43,6 +59,7 @@ Get-ChildItem -Recurse -Filter *.ps1 | ForEach-Object {
 - Use environment-variable forwarding rather than inline secret values.
 - Pin or otherwise control third-party automation dependencies where practical.
 - Document network access, filesystem scope, cloud permissions, and destructive capabilities.
+- Keep signing private keys outside the repository and protected by a strong passphrase or hardware-backed key storage.
 
 ## Pull requests
 
@@ -55,4 +72,4 @@ A pull request should explain:
 - rollback or migration requirements
 - unresolved risks
 
-Maintainers may request changes, additional validation, or smaller scope before merge.
+Every commit in the pull request must pass the `Verify signed commits` status check. Maintainers may request changes, additional validation, or smaller scope before merge.
